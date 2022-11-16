@@ -107,7 +107,7 @@
           <div class="col-12 overflow">
             <% for(var i=0; i < pesquisa.length; ++i) {%>
             <div class="slider2" style="align-items: center; padding-top: 10px;">
-              <a class="link-light" href="http://localhost:3000/public/uploads/<%=pesquisa[i].fileName%>"><%= pesquisa[i].originalname %></a>  
+              <a class="link-light" href="public/uploads/<%=pesquisa[i].fileName%>"><%= pesquisa[i].originalname %></a>  
             </div>
             <% } %>
           </div>
@@ -122,7 +122,7 @@
         </div>
         <% for(var i = 0; i < img.length; ++i) {%>
           <div class="slider3 col-3">
-            <img class="sliderImg d-flex justify-content-center" src="http://localhost:3000/public/uploads/<%=img[i].fileName%>">
+            <img class="sliderImg d-flex justify-content-center" src="public/uploads/<%=img[i].fileName%>">
             <div class="itensCenter"><%=img[i].nome%></div>
           </div>
         <% } %>
