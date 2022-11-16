@@ -1658,4 +1658,4 @@ app.get('/perfil', function (req, res, next) {
 
 app.use('/public', express.static('public'));
 // servidor na porta 3000 :D
-app.listen(3000, () => { console.log("Foi!") })
+app.listen(8080, () => { console.log("Foi!") })
