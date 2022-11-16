@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="public/stylesheets/style.css">
+  <style>
+    body {
+    background: url('public/logo/logo.jpg')
+    center top no-repeat; 
+    background-size: 100% 100%;
+    background-attachment:fixed;
+    }
+    </style>
+    
+  <title>Adicionar Arquivos</title>
+</head>
+
+<body>
+  <!-- /HEADER -->
+  <!-- Navbar -->
+  <div id="header">
+    <div class="container-fluid">
+
+      <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Táxons</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%= user %></h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/login">Sair</a>
+                </li>
+              </ul>
+              <!-- Pesquisar -->
+              <form class="d-flex" action="/pesquisar" method="post">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Perfil" name="pesquisar">
+                <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+              </form>
+              <!-- Pesquisar -->
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+  <!-- /Navbar -->
+  <!-- /HEADER -->
+
+  <!-- Slider -->
+  <div id="slider">
+    <div class="tabelaAdd">
+      <div class="p4">
+        <h2 class="p5" style="padding: 10px 0px 10px 0px; margin-top: 70px;">Adicione a pesquisa e as imagens ao <%= title[0].nome %>!</h2>
+      </div>
+      <div>
+        <div style="padding: 20px;">
+          <form class="was-validated" action="/postArquivos" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Insira a sua pesquisa:</label>
+              <input type="file" class="form-control" aria-label="file example" name="pesquisa" required
+                accept="application/pdf">
+            </div>
+            <div ><input type="hidden" name="nome" required value="<%=title[0].nome%>"></div>
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label">Insira as imagens coletadas:</label>
+              <input class="form-control" type="file" id="formFileMultiple" name="img" multiple required
+                accept="image/jpeg, image/png">
+            </div>
+            <div class="mb-3 text-center" style="margin-top: 10px;">
+              <button type="submit" class="btn btn-outline-dark">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Slider -->
+
+  <script src="public/javascripts/bootstrap.bundle.min.js"></script>
+  <script src="public/javascripts/index.js"></script>
+</body>
+
+</html>

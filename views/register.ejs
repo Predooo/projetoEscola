@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+      body {
+      background: url('public/logo/logo.jpg')
+      center top no-repeat; 
+      background-size: 100% 100%;
+      background-attachment:fixed;
+      }
+      </style>
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="public/stylesheets/style.css">
+  
+    <title>Registro</title>
+  </head>
+
+  <body>
+    
+    <% for(var i = 0; i < erros.length; ++i) {%>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Ocorreu um problema!</strong> <%= erros[i].texto %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   <% } %>
+    <div style="align-items: center;">
+    </div>
+    <div id="header">
+        <div class="container register" >
+        <div class="row">
+          <div class="col" style="margin-top: 100px;">
+            <h1>Táxons</h1>
+            <p style="text-align: justify; align-items: center;">Táxons é uma plataforma com o objetivo de publicar pesquisar e aprender Táxons Biológicos! Seja bem vindo! Você está na tela de registro!</p>
+            <a href="/login" class="link-dark">Já possui registro? Clique aqui para ir para a tela de login!</a>
+          </div>
+
+          <div class="col">
+            <h4>Informe seus dados:</h4>
+            <form action="/registrodedados" method="post">
+              <div class="input-group">
+                <span class="input-group-text">Nome e Sobrenome:</span>
+                <input type="text" aria-label="First name" class="form-control" name="nome" required>
+                <input type="text" aria-label="Last name" class="form-control" name="sobrenome" required>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Formação:</label>
+                <input type="text" class="form-control" name="formacao">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Senha:</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="senha" required>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Repita sua Senha:</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="senha2" required>
+              </div>
+              <div class="card text-center">
+                <button type="submit" class="btn btn-outline-dark">Cadastrar</button>
+              </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="public/javascripts/bootstrap.bundle.min.js"></script>
+  <script src="public/javascripts/index.js"></script>
+</body>
+</html>

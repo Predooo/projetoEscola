@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="public/stylesheets/style.css">
+    <style>body {
+      background: url('public/logo/logo.jpg')
+      center top no-repeat; 
+      background-size: 100% 100%;
+      background-attachment:fixed;
+      }</style>
+    <title>Adicionar Táxon</title>
+  </head>
+
+  <body > 
+    <!-- /HEADER -->
+        <!-- Navbar -->
+          <div id="header">
+            <div class="container-fluid">
+      
+                <nav class="navbar navbar-light bg-light fixed-top">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">Táxons</a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                          <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%= user %></h5>
+                          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
+                              </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/login">Sair</a>
+                              </li>
+                          </ul>
+                          <!-- Pesquisar -->
+                          <form class="d-flex" action="/pesquisar" method="post">
+                            <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Perfil" name="pesquisar">
+                            <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+                          </form>
+                          <!-- Pesquisar -->
+                        </div>
+                      </div>
+                    </div>
+                  </nav>
+      
+            </div>
+        </div>
+        <!-- /Navbar -->
+    <!-- /HEADER -->
+    
+    <!-- Slider -->
+    <div id="slider">
+        <div>
+            <div class="tabelaAdd">
+              <% if (!title[1]) { %>
+                <div class="p4">
+                  <h2 class="p5" style="padding: 10px 0px 10px 0px; margin-top: 70px;">Você está adicionando um dominio!</h2>
+                </div>
+              <% } %>
+              <% if (title[1]) { %>
+                <div class="p4">
+                  <h2 class="p5" style="padding: 10px 0px 10px 0px;max-height:65px; margin-top:70px;">Você está adicionando um clado partencente ao(à) <%= title[1].nome %>!</h2>
+                </div>
+              <% } %>
+              <div style="padding: 20px;">
+                <form class="was-validated" action="/registrodeTaxons" method="post">
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Nome do clado:</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="nome" required>
+                  </div>
+
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Autor responável:</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="autor" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="validationTextarea" class="form-label">Resumo:</label>
+                    <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Informe um resumo do táxon!" name="resumo" required></textarea>
+                  </div>
+                  <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-outline-dark">Cadastrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>    
+        </div>
+    </div>  
+    <!-- /Slider -->
+    
+  <script src="public/javascripts/bootstrap.bundle.min.js"></script>
+  <script src="public/javascripts/index.js"></script>
+</body>
+</html>

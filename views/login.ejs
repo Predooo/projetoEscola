@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="public/stylesheets/style.css">
+    <style>
+    body {
+    background: url('public/logo/logo.jpg')
+    center top no-repeat; 
+    background-size: 100% 100%;
+    background-attachment:fixed;
+    }
+    </style>
+    <title>Login</title>
+  </head>
+  <body>
+  <% for(var i=0; i < erro_login.length; ++i) {%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Ocorreu um problema!</strong> <%= erro_login[i].texto %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+  <div id="header">
+    <div class="bg-login">
+    <div class="container login">
+      <div class="row">
+        <div class="col" style="text-align: center;">
+          <h1>Táxons</h1>
+          <p style="text-align: justify;">Táxons é uma plataforma com o objetivo de publicar pesquisar e aprender Táxons Biológicos! Seja bem vindo! Você está na tela de login!</p>
+        </div>
+        <div class="col">
+          <form action="/logar" method="post">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Informe seu email:</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Informe sua senha:</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" name="senha" required>    
+            </div>
+            <div class="card text-center">
+              <button type="submit" class="btn btn-outline-dark" role="button">Entrar</button>
+            </div>
+        </form>
+        <a href="/register" class="link-dark">Clique aqui para se cadastrar!</a></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  <script src="public/javascripts/bootstrap.bundle.min.js"></script>
+  <script src="public/javascripts/index.js"></script>
+</body>
+</html>

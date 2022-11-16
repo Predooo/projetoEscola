@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="public/stylesheets/style.css">
+
+    <title>Pesquisas</title>
+
+</head>
+<body>
+    <!-- HEADER -->
+    <!-- Navbar -->
+    <div id="header">
+        <div class="container-fluid">
+
+            <nav class="navbar navbar-light bg-light fixed-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Táxons</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%= user %></h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="./perfil">Perfil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="./login">Sair</a>
+                                </li>
+                            </ul>
+                            <!-- Pesquisar -->
+                            <form class="d-flex" action="/pesquisar" method="post">
+                                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Perfil" name="pesquisar">
+                                <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+                              </form>
+                            <!-- Pesquisar -->
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+    <!-- /Navbar -->
+    <!-- /HEADER -->
+<!-- /SLIDER -->
+    <div id="slider" style="margin-top: 60px;">
+    <!-- DIV DO BD -->
+        <% if (dominios.length==1 && reinos.length==1 && filos.length==1 && classes.length==1 && ordens.length==1 && familias.length==1 && generos.length==1 && especies.length==1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Nenhum resultado para esta pesquisa!</h2>
+                </div>
+            </div>
+        <% } %>
+        <% if (dominios.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Dominios encontrados!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < dominios.length; ++i) {%>
+                            <div class="slider2">
+                                <%= dominios[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= dominios[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= dominios[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= dominios[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= dominios[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (reinos.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Reinos encontrados!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < reinos.length; ++i) {%>
+                            <div class="slider2">
+                                <%= reinos[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= reinos[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= reinos[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= reinos[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= reinos[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= reinos[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= reinos[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (filos.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Filos encontrados!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < filos.length; ++i) {%>
+                            <div class="slider2">
+                                <%= filos[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= filos[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= filos[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= filos[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= filos[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= filos[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= filos[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= filos[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= filos[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (classes.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Classes encontradas!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < classes.length; ++i) {%>
+                            <div class="slider2">
+                                <%= classes[i].nome %>
+                                <!-- BOTOES -->
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= classes[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= classes[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= classes[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= classes[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= classes[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= classes[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= classes[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= classes[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= classes[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= classes[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (ordens.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Ordens encontradas!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < ordens.length; ++i) {%>
+                            <div class="slider2">
+                                <%= ordens[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= ordens[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= ordens[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= ordens[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= ordens[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= ordens[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= ordens[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= ordens[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= ordens[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= ordens[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= ordens[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= ordens[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= ordens[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (familias.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Famílias encontradas!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < familias.length; ++i) {%>
+                            <div class="slider2">
+                                <%= familias[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= familias[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= familias[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= familias[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= familias[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= familias[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk_ordens" value="<%= familias[i].fk_ordens %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= familias[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= familias[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= familias[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= familias[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= familias[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= familias[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk_ordens" value="<%= familias[i].fk_ordens %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= familias[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (generos.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Genêros encontrados!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < generos.length; ++i) {%>
+                            <div class="slider2">
+                                <%= generos[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/adentrarTaxons" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= generos[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= generos[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= generos[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= generos[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= generos[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk_ordens" value="<%= generos[i].fk_ordens %>"></div>
+                                        <div><input type="hidden" name="fk_familias" value="<%= generos[i].fk_familias %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= generos[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Observar clados!</button></div>
+                                    </form>
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= generos[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= generos[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= generos[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= generos[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= generos[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk_ordens" value="<%= generos[i].fk_ordens %>"></div>
+                                        <div><input type="hidden" name="fk_familias" value="<%= generos[i].fk_familias %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= generos[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <% if (especies.length>1) { %>
+            <div class="tabela">
+                <div class="p4">
+                    <h2 class="p5">Espécies encontradas!</h2>
+                </div>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-12 overflow">
+                            <!-- BOTOES -->
+                            <% for(var i=1; i < especies.length; ++i) {%>
+                            <div class="slider2">
+                                <%= especies[i].nome %>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <form action="/paginaTaxon" method="post">
+                                        <div><input type="hidden" name="iPesquisa" value="1"></div>
+                                        <div><input type="hidden" name="url" value="<%= especies[0].nome %>"></div>
+                                        <div><input type="hidden" name="fk_dominios" value="<%= especies[i].fk_dominios %>"></div>
+                                        <div><input type="hidden" name="fk_reinos" value="<%= especies[i].fk_reinos %>"></div>
+                                        <div><input type="hidden" name="fk_filos" value="<%= especies[i].fk_filos %>"></div>
+                                        <div><input type="hidden" name="fk_classes" value="<%= especies[i].fk_classes %>"></div>
+                                        <div><input type="hidden" name="fk_ordens" value="<%= especies[i].fk_ordens %>"></div>
+                                        <div><input type="hidden" name="fk_familias" value="<%= especies[i].fk_familias %>"></div>
+                                        <div><input type="hidden" name="fk_generos" value="<%= especies[i].fk_generos %>"></div>
+                                        <div><input type="hidden" name="fk" value="<%= especies[i].id %>"></div>
+                                        <div><button type="submit" class="btn btn-light me-md-2">Perfil do clado!</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <!-- BOTOES -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <!-- /DIV DO BD -->
+    </div>
+<!-- /SLIDER -->
+
+
+    <script src="public/javascripts/bootstrap.bundle.min.js"></script>
+    <script src="public/javascripts/index.js"></script> 
+
+</body>
+
+</html>

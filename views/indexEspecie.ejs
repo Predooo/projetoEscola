@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="public/stylesheets/style.css">
+  <style>
+    body {
+      background: url('public/logo/logo.jpg') center top no-repeat;
+      background-size: 100% 100%;
+      background-attachment: fixed;
+    }
+  </style>
+  <title>Inicio</title>
+
+</head>
+
+<body>
+  <!-- /HEADER -->
+  <!-- Navbar -->
+  <div id="header">
+    <div class="container-fluid">
+
+      <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Táxons</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                <%= user %>
+              </h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="./perfil">Perfil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="./login">Sair</a>
+                </li>
+              </ul>
+              <!-- Pesquisar -->
+              <form class="d-flex" action="/pesquisar" method="post">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Perfil"
+                  name="pesquisar">
+                <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+              </form>
+              <!-- Pesquisar -->
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+  <!-- /Navbar -->
+  <!-- /HEADER -->
+  <!-- /SLIDER s-->
+  <div id="slider">
+    <!-- Resumo -->
+    <div class="resumo">
+      <div class="hstack gap-3" style="position:relative;">
+        <div style="max-width: 1000px;">
+          <%= resumo %>
+        </div>
+      </div>
+    </div>
+
+    <!-- /Resumo -->
+      <!-- DIV DO BD -->
+      <div class="conteiner-fluid">
+        <div class="tabela row">
+          <!--Classificassão-->
+           <% if (title[0].nome=="TABELA_ESPECIES" ) { %>
+            <div class="p4">
+              <h2 class="p5">Especies da categoria!</h2>
+            </div>
+          <% } %>
+          <!--Classificassão-->
+          <div class="overflow">
+            <% for(var i=1; i < title.length; ++i) {%>
+              <!-- BOTOES -->
+              <div class="slider2">
+                <div style="display: inline;">
+                  <div>
+                    <i><%= title[i].nome + ((i + 1) % 1===0 ? "" : "" ) %></i>
+                  </div>
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <form action="/paginaTaxon" method="post">
+                      <div><input type="hidden" name="identificadorPesquisa" value="0"></div>
+                      <div><input type="hidden" name="fk" value="<%= title[i].id %>"> </div>
+                      <div><button type="submit" class="btn btn-light me-md-2">Perfil do
+                          Clado!</button></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- BOTOES -->
+            <% } %>
+          </div>
+        </div>
+        <!-- IMAGENS -->
+        <div class="tabela row">
+          <div class="p4">
+            <h2 class="p5" style="padding: 10px 0px 10px 0px">Imagens coletadas!</h2>
+          </div>
+          <% for(var i=1; i < img.length; ++i) {%>
+            <div class="slider3 col-3">
+              <img class="sliderImg d-flex justify-content-center"
+                src="http://localhost:3000/public/uploads/<%=img[i].fileName%>">
+              <div class="itensCenter">
+                <%=img[i].nome%>
+              </div>
+            </div>
+          <% } %>
+        </div>
+        <!-- IMAGENS -->
+      </div>
+      <!-- /DIV DO BD -->
+  </div>
+  <!-- /SLIDER -->
+  <script src="public/javascripts/bootstrap.bundle.min.js"></script>
+  <script src="public/javascripts/index.js"></script>
+
+</body>
+
+</html>
